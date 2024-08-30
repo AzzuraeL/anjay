@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+int pilihan(int Coiche, float Angka1, float Angka2);
+bool isNumber(char *stringArray);
+
+int main()
+{
+    // input angka
+    char Angka1[100], Angka2[100];
+    printf("Angka 1 : ");
+    scanf("%s", Angka1);
+    float Angka1fik = atof(Angka1);
+    printf("Angka 2 : ");
+    scanf("%s", Angka2);
+    float Angka2fik = atof(Angka2);
+
+    if (!isNumber(Angka1))
+    {
+        printf("Input must be number!\n");
+        return main();
+    }
+
+    // input pilihan
+    char Coiche[1];
+    printf("\nPlease Select Option 1-4\n1. Add\n2. Min\n3. Multiple\n4. Divide\n");
+    printf("Choice : ");
+    scanf("%s", Coiche);
+    int Coichefik = atoi(Coiche);
+
+    pilihan(Coichefik, Angka1fik, Angka2fik);
+}
+
+int pilihan(int Coiche, float Angka1, float Angka2)
+{
+    if (Coiche == 1)
+    {
+        float add = Angka1 + Angka2;
+        printf("\nHasil Penambahan: %f", add);
+    }
+    if (Coiche == 2)
+    {
+        float min = Angka1 - Angka2;
+        printf("\nHasil Pengurangan: %f", min);
+    }
+    if (Coiche == 3)
+    {
+        float mul = Angka1 * Angka2;
+        printf("\nHasil Perkalian: %f", mul);
+    }
+    if (Coiche == 4)
+    {
+        if (Angka2 == 0)
+        {
+            printf("Cannot Divide by ZERO!");
+        }
+        else
+        {
+            float bag = Angka1 / Angka2;
+            printf("\nHasil Pembagian: %f", bag);
+        }
+    }
+    if (Coiche == 0)
+    {
+        printf("Choice not available!");
+        return 1;
+    }
+}
+
+bool isNumber(char *stringArray)
+{
+
+    // go through each character
+    // location in the array until
+    // we reach the null character (end of input)
+    for (int i = 0; stringArray[i] != '\000'; i++)
+    {
+        if (isdigit(stringArray[i]) == 0) // if the current character is not a digit....
+            return false;                 // return false and end function here
+    }
+
+    return true; // return true since the entire array contained numeric characters
+}
